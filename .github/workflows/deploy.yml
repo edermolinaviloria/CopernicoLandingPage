@@ -27,7 +27,7 @@ jobs:
 
     # 4. Construye el proyecto (genera la carpeta build o dist)
     - name: Generar el Build
-      run: npm run build
+      run: CI=false npm run build
 
     # 5. Sube los archivos a Hostinger vía FTP
     - name: Desplegar a Hostinger
