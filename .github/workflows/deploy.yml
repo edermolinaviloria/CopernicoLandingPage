@@ -1,0 +1,42 @@
+name: Desplegar React a Hostinger
+
+# Esto indica que la acción se ejecutará al hacer push a la rama main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Descarga el código del repositorio en el servidor de GitHub
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    # 2. Configura el entorno de Node.js
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18' # Puedes cambiarlo a la versión que uses
+
+    # 3. Instala las dependencias (node_modules)
+    - name: Instalar dependencias
+      run: npm install
+
+    # 4. Construye el proyecto (genera la carpeta build o dist)
+    - name: Generar el Build
+      run: npm run build
+
+    # 5. Sube los archivos a Hostinger vía FTP
+    - name: Desplegar a Hostinger
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        # IMPORTANTE: Usa './build/' si usas Create React App o './dist/' si usas Vite (no olvides la barra diagonal al final)
+        local-dir: ./build/ 
+        # IMPORTANTE: La carpeta de destino en Hostinger (no olvides la barra diagonal al final)
+        server-dir: ./public_html/
