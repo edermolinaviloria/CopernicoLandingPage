@@ -74,7 +74,7 @@ export const Conocenos = () => {
                                         <Avatar src={require('../assets/img/ederMolina.jpg')} sx={{ width: 120, height: 120, marginBottom: 1 }} />
 
                                         <Typography level="title-lg">Eder Molina Viloria</Typography>
-                                        <Typography level="body-sm" sx={{ maxWidth: '24ch' }}>Investigador Junior</Typography>
+                                        <Typography level="body-sm" sx={{ maxWidth: '24ch' }}>Investigador Senior</Typography>
                                         
                                         <Typography level="body-sm" sx={{ maxWidth: '24ch' }}>Doctorado en Ingeniería Universidad Nacional de Colombia</Typography>
 
