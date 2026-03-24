@@ -1,70 +1,57 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Centro Copérnico - Frontend
 
-## Available Scripts
+Este repositorio contiene el código fuente de la aplicación frontend para [Centro Copérnico](https://www.crcopernico.com/). Está construido con React y Material-UI, y configurado para despliegue continuo en un entorno de hosting compartido.
 
-In the project directory, you can run:
+## 🚀 Enlaces Importantes
 
-### `npm start`
+* **Sitio en Producción:** [https://www.crcopernico.com/](https://www.crcopernico.com/)
+* **Panel de Administración (Hosting):** [hPanel de crcopernico.com](https://hpanel.hostinger.com/websites/crcopernico.com)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Stack Tecnológico Principal
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* **Framework:** React 18 (Bootstrapped con Create React App)
+* **Enrutamiento:** React Router v6 (`react-router-dom`)
+* **Componentes y Estilos:** Material-UI (MUI v5) y Emotion
 
-### `npm test`
+## ⚙️ Arquitectura y Despliegue (Lectura Obligatoria)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+El flujo de despliegue de este proyecto está automatizado. Por favor, ten en cuenta la siguiente topología antes de realizar cambios en la infraestructura:
 
-### `npm run build`
+1. **Dominio y DNS:** El dominio `crcopernico.com` está registrado y gestionado en **GoDaddy**. Los Nameservers (DNS) están apuntando a los servidores de Hostinger.
+2. **Hosting:** El sitio se aloja en un plan de **Hostinger**. Los archivos estáticos compilados se sirven desde la carpeta `public_html` del servidor web (Apache/LiteSpeed).
+3. **CI/CD (Despliegue Automático):** El proyecto utiliza **GitHub Actions**. Cualquier *commit* que sea pusheado o mergeado a la rama `main` disparará un flujo de trabajo que ejecuta `npm run build` y sube los archivos resultantes automáticamente a Hostinger a través de FTP. **No es necesario (ni recomendable) subir archivos manualmente mediante FileZilla o el administrador web.**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### ⚠️ El archivo `.htaccess` y React Router
+Al ser una Single Page Application (SPA), React Router maneja las rutas del lado del cliente. Para evitar errores **404 (Página en blanco)** al recargar una ruta directa en el navegador (ej. `/conocenos`), el servidor necesita saber cómo enrutar el tráfico.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Regla de oro:** Existe un archivo `.htaccess` que **debe vivir dentro de la carpeta `public/`** del código fuente. De esta manera, al ejecutar el *build*, Webpack lo copia automáticamente a la raíz de producción e indica al servidor que redirija todas las peticiones físicas no encontradas hacia el archivo `index.html`. ¡No elimines ni modifiques este archivo a menos que cambies de servidor web!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ⚠️ Rutas relativas en `package.json`
+Notarás que el `package.json` incluye la propiedad `"homepage": "."`. Esto es vital para que el *build* de React genere rutas relativas correctas para los assets (archivos JS y CSS) y la interfaz no cargue en blanco por errores de rutas estáticas en Hostinger.
 
-### `npm run eject`
+## 💻 Desarrollo Local
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Para levantar el entorno de desarrollo en tu máquina:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Instalar dependencias:**
+   ```bash
+   npm install
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2.  **Iniciar el servidor local:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    ```bash
+    npm start
+    ```
 
-## Learn More
+    Abre [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) para verlo en el navegador. La página se recargará automáticamente al guardar cambios.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3.  **Validar el Build (Importante para GitHub Actions):**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```bash
+    npm run build
+    ```
 
-### Code Splitting
+    *Nota sobre Integración Continua:* El entorno CI de GitHub Actions ejecuta este mismo comando, pero trata los *warnings* (advertencias de ESLint, como variables sin usar o imágenes sin etiqueta `alt`) como **errores fatales** que detienen el despliegue. Asegúrate de que tu código esté limpio de advertencias antes de hacer push a `main`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
