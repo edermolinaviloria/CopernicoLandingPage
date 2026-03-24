@@ -15,8 +15,7 @@ export const Footer = () => {
                <h3 style={{color:'white',marginBottom:0}}>Contacto</h3>
                         <p style={{color:'white'}}>
                             Eder Molina Viloria <br />
-                            Barranquilla <br />
-                            Direccion:  <br />
+                            Barranquilla - Colombia <br />
                             Email: info@crcopernico.com <br /><br />
                         </p>
                     </div>
@@ -25,11 +24,11 @@ export const Footer = () => {
                </div>
                </div>
 
-               <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+               {/* <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
                
                     <h3 style={{color:'white',textAlign:responsive ? 'center' : '',fontSize: responsive ? '12' : ''}}>Desarrollado por: Mateo Antequera</h3>
 
-               </div>
+               </div> */}
                
           
           </div>

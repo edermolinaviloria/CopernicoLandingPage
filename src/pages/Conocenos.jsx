@@ -110,7 +110,7 @@ export const Conocenos = () => {
 
                               </Card>
 
-                              <Card
+                              {/* <Card
                                    sx={{
                                         width: 320,
                                         maxWidth: '100%',
@@ -133,7 +133,7 @@ export const Conocenos = () => {
 
                                    </CardContent>
 
-                              </Card>
+                              </Card> */}
 
                          </div>
 
