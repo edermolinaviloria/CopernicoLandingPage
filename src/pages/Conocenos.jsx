@@ -5,7 +5,6 @@ import SvgIcon from '@mui/material/SvgIcon';
 
 
 
-
 export const Conocenos = () => {
 
      const responsive = useMediaQuery('(max-width: 767px)');
